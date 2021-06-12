@@ -21,6 +21,14 @@ def getCardImage(url, cardName):
 
     if comps:
         comps[0] = 'https://gatherer.wizards.com' + comps[0][5:]
+        
+    print(comps)
+
+    image = requests.get(url, stream=True)
+
+    file = open('C:/magic/%s.png' % cardName, 'bw')
+    for chunk in image.iter_content(4096):
+        file.write(chunk)
 
     return comps #при получении значения тоже проверяй, не пустой ли массив
                  #если пустой - отправляй строку "NULL", чтобы функция в sql поставила все по дефолту
